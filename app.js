@@ -70,12 +70,17 @@ class App{
         controller.addEventListener('select', onSelect);
 
         const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
+        const geometry = new THREE.IcosahedronBufferGeometry(0.08, 2);
 
-        const mesh = new THREE.Mesh(self.geometry, material);
-        mesh.position.set(0, 0, -0.3).applyMatrix4(controller.matrixWorld);
-        mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
-        self.scene.add(mesh);
-        self.meshes.push(mesh);
+        for (let i = 0; i < 200; i++)
+        {
+            const object = new THREE.Mesh(geometry, material);
+
+            object.position.x = this.random(-2, 2);
+            object.position.y = this.random(-2, 2);
+            object.position.z = this.random(-2, 2);
+            this.scene.add(object);
+        }
 
         this.scene.add(controller);
 
