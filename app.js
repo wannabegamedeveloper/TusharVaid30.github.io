@@ -53,7 +53,6 @@ class App{
         let controller;
 
         const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
-        const geometry = new THREE.IcosahedronBufferGeometry(0.08, 2);
 
         function onSelect()
         {
