@@ -48,6 +48,8 @@ class App{
     setupXR(){
         this.renderer.xr.enabled = true;
 
+        alert ("This is a warning message!");
+
         const self = this;
 
         let controller;
@@ -61,8 +63,6 @@ class App{
             mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
             self.scene.add(mesh);
             self.meshes.push(mesh);
-
-            alert ("This is a warning message!");
 
         }
 
