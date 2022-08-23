@@ -61,6 +61,9 @@ class App{
             mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
             self.scene.add(mesh);
             self.meshes.push(mesh);
+
+            alert ("This is a warning message!");
+
         }
 
         const btn = new ARButton(this.renderer);
