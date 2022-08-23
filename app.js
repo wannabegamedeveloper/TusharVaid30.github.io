@@ -52,8 +52,6 @@ class App{
 
         let controller;
 
-        const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
-
         function onSelect()
         {
             const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
