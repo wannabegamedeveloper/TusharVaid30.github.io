@@ -48,11 +48,18 @@ class App{
     setupXR(){
         this.renderer.xr.enabled = true;
 
-        alert ("This is a warning message!");
-
         const self = this;
 
         let controller;
+
+        const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
+
+        const mesh = new THREE.Mesh(self.geometry, material);
+        mesh.position.set(0, 0, -0.3).applyMatrix4(controller.matrixWorld);
+        mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
+        self.scene.add(mesh);
+        self.meshes.push(mesh);
+
 
         function onSelect()
         {
