@@ -46,7 +46,24 @@ class App{
     }
     
     setupXR(){
-        
+        this.renderer.xr.enabled = true;
+
+        const self = this;
+
+        let controller;
+
+        function onSelect()
+        {
+
+        }
+
+        const btn = new ARButton(this.renderer);
+
+        controller = this.renderer.xr.getController(0);
+        controller.addEventListener('select', onSelect);
+
+        this.scene.add(controller);
+
         this.renderer.setAnimationLoop( this.render.bind(this) );
     }
     
