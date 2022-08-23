@@ -52,15 +52,6 @@ class App{
 
         let controller;
 
-        const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
-
-        const mesh = new THREE.Mesh(self.geometry, material);
-        mesh.position.set(0, 0, -0.3).applyMatrix4(controller.matrixWorld);
-        mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
-        self.scene.add(mesh);
-        self.meshes.push(mesh);
-
-
         function onSelect()
         {
             const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
@@ -77,6 +68,14 @@ class App{
 
         controller = this.renderer.xr.getController(0);
         controller.addEventListener('select', onSelect);
+
+        const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
+
+        const mesh = new THREE.Mesh(self.geometry, material);
+        mesh.position.set(0, 0, -0.3).applyMatrix4(controller.matrixWorld);
+        mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
+        self.scene.add(mesh);
+        self.meshes.push(mesh);
 
         this.scene.add(controller);
 
