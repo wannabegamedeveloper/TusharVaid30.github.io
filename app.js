@@ -48,6 +48,10 @@ class App{
     setupXR(){
         this.renderer.xr.enabled = true;
 
+        const self = this;
+
+        let controller;
+
         const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
         const geometry = new THREE.IcosahedronBufferGeometry(0.08, 2);
 
@@ -62,6 +66,10 @@ class App{
         }
 
         const btn = new ARButton(this.renderer);
+
+        controller = this.renderer.xr.getController(0);
+
+        this.scene.add(controller);
 
         this.renderer.setAnimationLoop( this.render.bind(this) );
     }
