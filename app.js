@@ -1,6 +1,5 @@
 import * as THREE from './libs/three125/three.module.js';
 import { OrbitControls } from './libs/three125/OrbitControls.js';
-import { Stats } from './libs/stats.module.js';
 import { ARButton } from './libs/ARButton.js';
 
 class App{
@@ -30,9 +29,6 @@ class App{
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.controls.target.set(0, 3.5, 0);
         this.controls.update();
-        
-        this.stats = new Stats();
-        document.body.appendChild( this.stats.dom );
         
         this.initScene();
         this.setupXR();
