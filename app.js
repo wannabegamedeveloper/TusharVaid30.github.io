@@ -55,7 +55,6 @@ class App{
                 
         function onSelect()
         {
-            alert("testestest");
             const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.random()});
 
             const mesh = new THREE.Mesh(geometry, material);
