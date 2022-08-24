@@ -8,7 +8,7 @@ class App{
 		const container = document.createElement( 'div' );
 		document.body.appendChild( container );
         
-        this.clock = new THREE.Clock();
+        //this.clock = new THREE.Clock();
                 
 		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100 );
 		this.camera.position.set( 0, 1.6, 0 );
