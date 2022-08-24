@@ -5,6 +5,8 @@ import { ARButton } from './libs/ARButton.js';
 class App{
     constructor(){
         const container = document.createElement( 'div' );
+        var text = document.getElementByID("distanceDisplay");
+        text.innerHTML = "THREE THREE";
         document.body.appendChild( container );
         
         this.clock = new THREE.Clock();
@@ -37,9 +39,6 @@ class App{
     }   
     
     initScene(){
-        const text = document.createElement("TEST TEST");
-        text.innerHTML = "TEST";
-        document.body.appendChild(text);
         this.geometry = new THREE.BoxBufferGeometry( 0.06, 0.06, 0.06 ); 
         this.meshes = [];
     }
