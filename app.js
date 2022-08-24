@@ -1,6 +1,6 @@
 import * as THREE from './libs/three125/three.module.js';
 import { OrbitControls } from './libs/three125/OrbitControls.js';
-import { Stats } from './libs/stats.module.js';
+//import { Stats } from './libs/stats.module.js';
 import { ARButton } from './libs/ARButton.js';
 
 class App{
@@ -33,8 +33,8 @@ class App{
         this.controls.target.set(0, 3.5, 0);
         this.controls.update();
 
-        this.stats = new Stats();
-        document.body.appendChild( this.stats.dom );
+        //this.stats = new Stats();
+        //document.body.appendChild( this.stats.dom );
         
         this.initScene();
         this.setupXR();
@@ -91,7 +91,7 @@ class App{
     }
     
     render( ) {
-        this.stats.update();
+        //this.stats.update();
 
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
