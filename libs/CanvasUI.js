@@ -41,7 +41,7 @@ class CanvasUI{
                 fontFamily:'Arial', 
                 fontSize:30, 
                 padding:20, 
-                backgroundColor: '#fff', 
+                backgroundColor: '#fff000', 
                 fontColor:'#fff', 
                 borderRadius: 6
             }
