@@ -36,7 +36,7 @@ class CanvasUI{
             panelSize: { width: 1, height: 1},
             width: 512,
             height: 512,
-            opacity: 0.0,
+            opacity: 0.7,
             body:{
                 fontFamily:'Arial', 
                 fontSize:30, 
