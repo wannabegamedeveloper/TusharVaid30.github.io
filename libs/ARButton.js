@@ -176,6 +176,7 @@ class ARButton{
         element.style.background = (active) ? 'rgba(80,80,80,1)' : 'rgba(80,80,80,1)';
         element.style.color = '#fff';
         element.style.font = `normal ${fontSize}px sans-serif`;
+        element.style.fontSize = '5px';
         element.style.textAlign = 'center';
         element.style.opacity = '0.5';
         element.style.outline = 'none';
