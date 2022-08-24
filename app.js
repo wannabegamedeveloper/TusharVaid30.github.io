@@ -7,6 +7,8 @@ class App{
 	constructor(){
 		const container = document.createElement( 'div' );
 		document.body.appendChild( container );
+        
+        this.clock = new THREE.Clock();
                 
 		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 100 );
 		this.camera.position.set( 0, 1.6, 0 );
@@ -27,6 +29,10 @@ class App{
         this.renderer.outputEncoding = THREE.sRGBEncoding;
         
 		container.appendChild( this.renderer.domElement );
+
+        this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+        this.controls.target.set(0, 3.5, 0);
+        this.controls.update();
         
         this.initScene();
         this.setupXR();
@@ -51,7 +57,7 @@ class App{
     
     setupXR(){
         this.renderer.xr.enabled = true;
-        
+
         const self = this;
 
         let controller;
@@ -84,6 +90,7 @@ class App{
     }
     
 	render( ) {   
+        this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
 }
