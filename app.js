@@ -71,11 +71,6 @@ class App{
             mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
             self.scene.add(mesh);
             self.meshes.push(mesh);
-
-            var position = new THREE.Vector3;
-            position.setFromMatrixPosition(mesh.matrixWorld);
-
-            document.getElementById("TEXT").innerHTML = position.x + ", " + position.y + ", " + position.z;
         }
 
         const btn = new ARButton(this.renderer, { sessionInit: { optionalFeatures: [ 'dom-overlay' ], domOverlay: { root: document.body } } } );
@@ -94,7 +89,12 @@ class App{
         this.renderer.setSize( window.innerWidth, window.innerHeight );  
     }
     
-	render( ) {   
+	render( ) {
+        var position = new THREE.Vector3;
+        position.setFromMatrixPosition(this.camera.matrixWorld);
+
+        document.getElementById("TEXT").innerHTML = this.camera.position.x + ", " + this.camera.position.y + ", " + this.camera.position.z;
+
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
