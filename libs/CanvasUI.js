@@ -41,7 +41,7 @@ class CanvasUI{
                 fontFamily:'Arial', 
                 fontSize:30, 
                 padding:20, 
-                backgroundColor: '#000', 
+                backgroundColor: '#fff', 
                 fontColor:'#fff', 
                 borderRadius: 6
             }
@@ -87,7 +87,7 @@ class CanvasUI{
         this.context = canvas.getContext('2d');
         this.context.save();
         
-        const opacity = ( this.config.opacity !== undefined ) ? this.config.opacity : 0.0;
+        const opacity = ( this.config.opacity !== undefined ) ? this.config.opacity : 0.7;
 		
         const planeMaterial = new MeshBasicMaterial({ transparent: true, opacity });
         this.panelSize = ( this.config.panelSize !== undefined) ? this.config.panelSize : { width:1, height:1 }
