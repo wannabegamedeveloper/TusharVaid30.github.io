@@ -98,24 +98,20 @@ class ARButton{
         //
 
         button.style.display = '';
-        button.style.right = '20px';
-        button.style.width = '80px';
+        button.style.left = '20px';
+        button.style.width = '40px';
         button.style.cursor = 'pointer';
-        button.innerHTML = '<i class="fas fa-camera"></i>';
+        button.innerHTML = (currentSession===null) ? 'START AR' : 'STOP AR';
         
 
         button.onmouseenter = function () {
             
-            button.style.fontSize = '12px'; 
-            button.textContent = (currentSession===null) ? 'START AR' : 'STOP AR';
             button.style.opacity = '1.0';
 
         };
 
         button.onmouseleave = function () {
             
-            button.style.fontSize = '30px'; 
-            button.innerHTML = '<i class="fas fa-camera"></i>';
             button.style.opacity = '0.5';
 
         };
@@ -176,9 +172,9 @@ class ARButton{
         element.style.position = 'absolute';
         element.style.bottom = '20px';
         if (!ignorePadding) element.style.padding = '12px 6px';
-        element.style.border = '1px solid #fff';
+        element.style.border = '4px solid #000fff';
         element.style.borderRadius = '4px';
-        element.style.background = (active) ? 'rgba(20,150,80,1)' : 'rgba(180,20,20,1)';
+        element.style.background = (active) ? 'rgba(80,80,80,1)' : 'rgba(80,80,80,1)';
         element.style.color = '#fff';
         element.style.font = `normal ${fontSize}px sans-serif`;
         element.style.textAlign = 'center';
