@@ -73,7 +73,7 @@ class App{
             self.meshes.push(mesh);
 
             var position = new THREE.Vector3;
-            position.getPositionFromMatrix(mesh.matrixWorld);
+            position.setFromMatrixPosition(mesh.matrixWorld);
 
             document.getElementById("TEXT").innerHTML = position.x + ", " + position.y + ", " + position.z;
         }
