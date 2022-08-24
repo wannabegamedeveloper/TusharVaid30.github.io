@@ -41,8 +41,6 @@ class App{
 	}	
     
     initScene(){
-        document.getElementById("TEXT").innerHTML = "no text testttt";
-
         this.geometry = new THREE.BoxBufferGeometry( 0.06, 0.06, 0.06 ); 
         this.meshes = [];
         
@@ -92,6 +90,7 @@ class App{
     }
     
 	render( ) {   
+        document.getElementById("TEXT").innerHTML = this.camera.position;
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
