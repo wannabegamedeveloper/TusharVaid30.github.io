@@ -37,6 +37,9 @@ class App{
     }   
     
     initScene(){
+        const text = document.createElement("TEST TEST");
+        text.innerHTML = "TEST";
+        document.body.appendChild(text);
         this.geometry = new THREE.BoxBufferGeometry( 0.06, 0.06, 0.06 ); 
         this.meshes = [];
     }
@@ -84,7 +87,8 @@ class App{
         this.renderer.setSize( window.innerWidth, window.innerHeight );  
     }
     
-    render( ) {   
+    render( ) {
+
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
