@@ -1,10 +1,13 @@
 import * as THREE from './libs/three125/three.module.js';
 import { OrbitControls } from './libs/three125/OrbitControls.js';
+import { Stats } from './libs/stats.module.js';
 import { ARButton } from './libs/ARButton.js';
 
 class App{
     constructor(){
         const container = document.createElement( 'div' );
+        //var text = document.getElementByID("distanceDisplay");
+        //text.innerHTML = "THREE THREE";
         document.body.appendChild( container );
         
         this.clock = new THREE.Clock();
@@ -29,6 +32,9 @@ class App{
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.controls.target.set(0, 3.5, 0);
         this.controls.update();
+
+        this.stats = new Stats();
+        document.body.appendChild( this.stats.dom );
         
         this.initScene();
         this.setupXR();
@@ -52,7 +58,7 @@ class App{
         {
             const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.random()});
 
-            const mesh = new THREE.Mesh(geometry, material);
+            const mesh = new THREE.Mesh(self.geometry, material);
             mesh.position.set(0, 0, -0.3).applyMatrix4(controller.matrixWorld);
             mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
             self.scene.add(mesh);
@@ -85,6 +91,8 @@ class App{
     }
     
     render( ) {
+        this.stats.update();
+
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
