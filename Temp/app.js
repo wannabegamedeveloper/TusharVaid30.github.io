@@ -6,8 +6,6 @@ import { ARButton } from './libs/ARButton.js';
 class App{
     constructor(){
         const container = document.createElement( 'div' );
-        //var text = document.getElementByID("distanceDisplay");
-        //text.innerHTML = "THREE THREE";
         document.body.appendChild( container );
         
         this.clock = new THREE.Clock();
