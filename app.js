@@ -56,7 +56,7 @@ class App{
     }
     
     setupXR(){
-        this.renderer.xr.enabled = true;
+        //this.renderer.xr.enabled = true;
 
         const self = this;
 
