@@ -41,6 +41,8 @@ class App{
 	}	
     
     initScene(){
+        document.getElementById("TEXT").innerHTML = "no text testttt";
+
         this.geometry = new THREE.BoxBufferGeometry( 0.06, 0.06, 0.06 ); 
         this.meshes = [];
         
