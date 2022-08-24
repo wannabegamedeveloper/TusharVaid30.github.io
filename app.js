@@ -1,5 +1,6 @@
 import * as THREE from './libs/three125/three.module.js';
 import { OrbitControls } from './libs/three125/OrbitControls.js';
+import { Stats } from './libs/stats.module.js';
 import { ARButton } from './libs/ARButton.js';
 
 class App{
@@ -31,6 +32,9 @@ class App{
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.controls.target.set(0, 3.5, 0);
         this.controls.update();
+
+        this.stats = new Stats();
+        document.body.appendChild( this.stats.dom );
         
         this.initScene();
         this.setupXR();
@@ -39,23 +43,6 @@ class App{
     }   
     
     initScene(){
-        const loader = new FontLoader();
-
-        loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
-
-        const textTHREE = new TextGeometry( 'Hello three.js!', {
-            font: font,
-            size: 80,
-            height: 5,
-            curveSegments: 12,
-            bevelEnabled: true,
-            bevelThickness: 10,
-            bevelSize: 8,
-            bevelOffset: 0,
-            bevelSegments: 5
-            } );
-        } );
-
         this.geometry = new THREE.BoxBufferGeometry( 0.06, 0.06, 0.06 ); 
         this.meshes = [];
     }
@@ -71,7 +58,7 @@ class App{
         {
             const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.random()});
 
-            const mesh = new THREE.Mesh(textTHREE, material);
+            const mesh = new THREE.Mesh(geometry, material);
             mesh.position.set(0, 0, -0.3).applyMatrix4(controller.matrixWorld);
             mesh.quaternion.setFromRotationMatrix(controller.matrixWorld);
             self.scene.add(mesh);
@@ -104,6 +91,7 @@ class App{
     }
     
     render( ) {
+        this.stats.update();
 
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
