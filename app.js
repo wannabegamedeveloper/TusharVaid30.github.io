@@ -38,7 +38,7 @@ class App{
         this.geometry = new THREE.BoxBufferGeometry( 0.06, 0.06, 0.06 ); 
         this.meshes = [];
         
-        this.createUI();
+        //this.createUI();
     }
     
     createUI() {
