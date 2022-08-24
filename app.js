@@ -5,8 +5,6 @@ import { ARButton } from './libs/ARButton.js';
 class App{
     constructor(){
         const container = document.createElement( 'div' );
-        //var text = document.getElementByID("distanceDisplay");
-        //text.innerHTML = "THREE THREE";
         document.body.appendChild( container );
         
         this.clock = new THREE.Clock();
@@ -31,9 +29,6 @@ class App{
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.controls.target.set(0, 3.5, 0);
         this.controls.update();
-
-        //this.stats = new Stats();
-        //document.body.appendChild( this.stats.dom );
         
         this.initScene();
         this.setupXR();
@@ -90,8 +85,6 @@ class App{
     }
     
     render( ) {
-        //this.stats.update();
-
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
