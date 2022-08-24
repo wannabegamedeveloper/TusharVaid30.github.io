@@ -51,24 +51,29 @@ class App{
         const self = this;
 
         let controller;
-            
+                
+        function onSelect()
+        {
+            alert("TEST TEST");
+        }
+
         const btn = new ARButton(this.renderer);
 
-        //controller = this.renderer.xr.getController(0);
-        //controller.addEventListener('select', onSelect);
+        controller = this.renderer.xr.getController(0);
+        controller.addEventListener('select', onSelect);        
 
-        const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
-
-        const mesh = new THREE.Mesh(self.geometry, material);
-        mesh.position.x = this.Random(-2, 2);
-        mesh.position.y = this.Random(-2, 2);
-        mesh.position.z = this.Random(-2, 2);
-        self.scene.add(mesh);
-        self.meshes.push(mesh);
-
-        //this.scene.add(controller);
+        this.scene.add(controller);
 
         this.renderer.setAnimationLoop( this.render.bind(this) );
+
+        //const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
+
+        //const mesh = new THREE.Mesh(self.geometry, material);
+        //mesh.position.set(0, 0, -0.3).applyMatrix4(controller) = this.Random(-2, 2);
+        //mesh.position.y = this.Random(-2, 2);
+        //mesh.position.z = this.Random(-2, 2);
+        //self.scene.add(mesh);
+        //self.meshes.push(mesh);
     }
     
     resize(){
