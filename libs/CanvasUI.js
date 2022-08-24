@@ -31,7 +31,7 @@ clipPath: svg path
 border: width color style
 */
 class CanvasUI{
-	constructor(content, config){
+    constructor(content, config){
         const defaultconfig = {
             panelSize: { width: 1, height: 1},
             width: 512,
@@ -46,7 +46,7 @@ class CanvasUI{
                 borderRadius: 6
             }
         }
-		this.config = (config===undefined) ? defaultconfig : config;
+        this.config = (config===undefined) ? defaultconfig : config;
         
         if (this.config.width === undefined) this.config.width = 512;
         if (this.config.height === undefined) this.config.height = 512;
@@ -88,12 +88,12 @@ class CanvasUI{
         this.context.save();
         
         const opacity = ( this.config.opacity !== undefined ) ? this.config.opacity : 0.7;
-		
+        
         const planeMaterial = new MeshBasicMaterial({ transparent: true, opacity });
         this.panelSize = ( this.config.panelSize !== undefined) ? this.config.panelSize : { width:1, height:1 }
-		const planeGeometry = new PlaneGeometry(this.panelSize.width, this.panelSize.height);
-		
-		this.mesh = new Mesh(planeGeometry, planeMaterial);
+        const planeGeometry = new PlaneGeometry(this.panelSize.width, this.panelSize.height);
+        
+        this.mesh = new Mesh(planeGeometry, planeMaterial);
         
         this.texture = new CanvasTexture(canvas);
         this.mesh.material.map = this.texture;
@@ -134,8 +134,8 @@ class CanvasUI{
         this.needsUpdate = true;
         
         this.update();
-	}
-	
+    }
+    
     getIntersectY( index ){
         const height = this.config.height || 512;
         const intersect = this.intersects[index];
@@ -406,7 +406,7 @@ class CanvasUI{
         }
     }
     
-	update(){    
+    update(){    
         if (this.mesh===undefined) return;
             
         if ( this.controller ) this.handleController( this.controller, 0 );
@@ -415,10 +415,10 @@ class CanvasUI{
         if ( this.keyboard && this.keyboard.visible ) this.keyboard.update();
         
         if ( !this.needsUpdate ) return;
-		
-		let context = this.context;
-		
-		context.clearRect(0, 0, this.config.width, this.config.height);
+        
+        let context = this.context;
+        
+        context.clearRect(0, 0, this.config.width, this.config.height);
         
         const bgColor = ( this.config.body.backgroundColor ) ? this.config.body.backgroundColor : "#000";
         const fontFamily = ( this.config.body.fontFamily ) ? this.config.body.fontFamily : "Arial";
@@ -505,11 +505,11 @@ class CanvasUI{
                 }
             }
         })
-		
+        
         this.needsUpdate = false;
-		this.texture.needsUpdate = true;
-	}
-	
+        this.texture.needsUpdate = true;
+    }
+    
     loadImage(src) {
       return new Promise((resolve, reject) => {
         const img = new Image();
@@ -519,13 +519,13 @@ class CanvasUI{
       });
     }
 
-	createOffscreenCanvas(w, h) {
-		const canvas = document.createElement('canvas');
-		canvas.width = w;
-		canvas.height = h;
-		return canvas;
-	}
-	
+    createOffscreenCanvas(w, h) {
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        return canvas;
+    }
+    
     fillRoundedRect( x, y, w, h, radius ){
         const ctx = this.context;
         ctx.beginPath();
@@ -590,11 +590,11 @@ class CanvasUI{
         this.mesh.quaternion.copy( value );
     }
     
-	wrapText(name, txt){
+    wrapText(name, txt){
         //console.log( `wrapText: ${name}:${txt}`);
-		const words = txt.split(' ');
+        const words = txt.split(' ');
         let line = '';
-		const lines = [];
+        const lines = [];
         const config = (this.config[name]!==undefined) ? this.config[name] : this.config.body;
         const width = (config.width!==undefined) ? config.width : this.config.width;
         const height = (config.height!==undefined) ? config.height : this.config.height;
@@ -609,18 +609,18 @@ class CanvasUI{
         const fontSize = (config.fontSize !== undefined ) ? config.fontSize : ( this.config.body.fontSize !== undefined) ? this.config.body.fontSize : 30;
         const fontFamily = (config.fontFamily!==undefined) ? config.fontFamily : (this.config.body.fontFamily!==undefined) ? this.config.body.fontFamily : 'Arial';
         const leading = (config.leading !== undefined) ? config.leading : (this.config.body.leading !== undefined) ? this.config.body.leading : 8;
-		const lineHeight = fontSize + leading;
+        const lineHeight = fontSize + leading;
         
         const context = this.context;
         
         context.textAlign = textAlign;
         
-		context.font = `${fontSize}px '${fontFamily}'`;
-		
+        context.font = `${fontSize}px '${fontFamily}'`;
+        
         words.forEach( function(word){
-			let testLine = (words.length>1) ? `${line}${word} ` : word;
-        	let metrics = context.measureText(testLine);
-        	if (metrics.width > rect.width && word.length>1) {
+            let testLine = (words.length>1) ? `${line}${word} ` : word;
+            let metrics = context.measureText(testLine);
+            if (metrics.width > rect.width && word.length>1) {
                 if (line.length==0 && metrics.width > rect.width){
                     //word too long
                     while(metrics.width > rect.width){
@@ -639,15 +639,15 @@ class CanvasUI{
                     }
                     if (word != "") lines.push(word);
                 }else{
-				    lines.push(line);
-				    line = `${word} `;
+                    lines.push(line);
+                    line = `${word} `;
                 }
-			}else {
-				line = testLine;
-			}
-		});
-		
-		if (line != '') lines.push(line);
+            }else {
+                line = testLine;
+            }
+        });
+        
+        if (line != '') lines.push(line);
         
         const textHeight = lines.length * lineHeight;
         let scrollY = 0;
@@ -667,9 +667,9 @@ class CanvasUI{
             scrollY = config.scrollY;
             config.minScrollY = rect.height - textHeight;
         }
-		
-		let y = scrollY + rect.y + fontSize/2;
-		let x;
+        
+        let y = scrollY + rect.y + fontSize/2;
+        let x;
         
         switch( textAlign ){
             case "center":
@@ -683,11 +683,11 @@ class CanvasUI{
                 break;
         }
         
-		lines.forEach( (line) => {
+        lines.forEach( (line) => {
             if ((y + lineHeight) > 0) context.fillText(line, x, y);
-			y += lineHeight;
-		});
-	}
+            y += lineHeight;
+        });
+    }
 }
 
 export { CanvasUI };
