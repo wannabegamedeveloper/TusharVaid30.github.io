@@ -54,7 +54,7 @@ class App{
                 
         function onSelect()
         {
-            const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.Random()});
+            const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF * Math.random()});
 
             const mesh = new THREE.Mesh(self.geometry, material);
             mesh.position.set(0, 0, -0.3).applyMatrix4(controller.matrixWorld);
