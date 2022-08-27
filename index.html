@@ -8,8 +8,10 @@
          var geoLoc;
          
          function showLocation(position) {
-            var accuracy = position.coords.accuracy;
-            document.getElementById("location").innerHTML = "Location: " + accuracy;
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+
+            document.getElementById("location").innerHTML = "Latitude: " + accuracy + ", Longitude: " + long;
          }
          
          function errorHandler(err) {
