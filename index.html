@@ -1,30 +1,47 @@
-<!DOCTYPE html>
-<html>
-<body>
+<!DOCTYPE HTML>
 
-<p>Click the button to get your coordinates.</p>
+<head>
+   <html>
+   
+      <script type = "text/javascript">
+         var watchID;
+         var geoLoc;
+         
+         function showLocation(position) {
+            var accuracy = position.coords.accuracy;
+            document.getElementById("location").innerHTML = "Location: " + accuracy;
+         }
+         
+         function errorHandler(err) {
+            if(err.code == 1) {
+               alert("Error: Access is denied!");
+            } else if( err.code == 2) {
+               alert("Error: Position is unavailable!");
+            }
+         }
+         
+         function getLocationUpdate(){
+            
+            if(navigator.geolocation){
+               
+               // timeout at 60000 milliseconds (60 seconds)
+               var options = {timeout:1};
+               geoLoc = navigator.geolocation;
+               watchID = geoLoc.watchPosition(showLocation, errorHandler, options);
+            } else {
+               alert("Sorry, browser does not support geolocation!");
+            }
+         }
+      </script>
 
-<button onclick="getLocation()">Try It</button>
+      <p id = "location"></p>
 
-<p id="demo"></p>
-
-<script>
-var x = document.getElementById("demo");
-
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
-}
-</script>
-
-</body>
+   </head>
+   <body>
+   
+      <form>
+         <input type = "button" onclick = "getLocationUpdate();" value = "Watch Update"/>
+      </form>
+      
+   </body>
 </html>
-
