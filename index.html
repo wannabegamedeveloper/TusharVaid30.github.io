@@ -1,35 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Lecture 3.7</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <!--favicon -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <link rel="apple-touch-icon" sizes="180x180" href="../../css/favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="../../css/favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="../../css/favicon/favicon-16x16.png">
-        <link rel="manifest" href="../../css/favicon/site.webmanifest">
-        <link rel="mask-icon" href="../../css/favicon/safari-pinned-tab.svg" color="#5bbad5">
-        <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="theme-color" content="#ffffff">
-        <!-- end favicon -->
-        <style>
-            body{
-                margin: 0;
-                padding: 0;
-            }
-        </style>
-	</head>
-	<body>
-        <script src="./libs/fas.js"></script>
-        <script type="module">
-            import { App } from './app.js';
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+  <link href="css/doxygen.css" rel="stylesheet" type="text/css" />
+  <title>ORB-SLAM2.js Demos</title>
+</head>
+<body>
+<div class="header">
+  <div class="headertitle">
+    <div class="title">ORB-SLAM2.js Demos</div>
+  </div>
+</div>
+<div class="contents">
+  <div class="textblock">
+    <ul>
+      <li>
+        <p class="startli"><a class="el" href="mon-slam.html">Monocular SLAM</a></p>
+        <p class="startli"></p>
+      </li>
+      <li>
+        <p class="startli"><a class="el" href="rgbd-slam.html">RGBD SLAM</a></p>
+        <p class="startli"></p>
+      </li>
+    </ul>
+  </div>
+</div>
+To run the samples, your browser need support Web Worker and SharedArrayBuffer.<br>
+The monocular sample will obtain images from WebRTC and your camera.<br>
+The RGB-D sample will obtain images from rgb video file and depth video file. <br>The videos are from <a href="https://vision.in.tum.de/data/datasets/rgbd-dataset/download" target="_blank">TUM CVG dataset</a>.<br>
+Console will print the tracking state, camera pose and the numbers of key points and map points.
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-            document.addEventListener("DOMContentLoaded", function(){
-                const app = new App();
-                window.app = app;
-            });
-        </script>
-	</body>
+  ga('create', 'UA-104754587-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
 </html>
