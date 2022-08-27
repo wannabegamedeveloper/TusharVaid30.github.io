@@ -1,7 +1,6 @@
 import * as THREE from './libs/three/three.module.js';
-import { VRButton } from './libs/three/jsm/VRButton.js';
+import { VRButton } from './libs/VRButton.js';
 import { XRControllerModelFactory } from './libs/three/jsm/XRControllerModelFactory.js';
-import { BoxLineGeometry } from './libs/three/jsm/BoxLineGeometry.js';
 import { Stats } from './libs/stats.module.js';
 import { OrbitControls } from './libs/three/jsm/OrbitControls.js';
 
@@ -13,13 +12,13 @@ class App{
         
         this.clock = new THREE.Clock();
         
-		this.camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 100 );
-		this.camera.position.set( 0, 1.6, 3 );
+		this.camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 200 );
+		this.camera.position.set( 0, 1.6, 5 );
         
 		this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color( 0x505050 );
 
-		this.scene.add( new THREE.HemisphereLight( 0x606060, 0x404040 ) );
+		this.scene.add( new THREE.HemisphereLight( 0xffffff, 0x404040 ) );
 
         const light = new THREE.DirectionalLight( 0xffffff );
         light.position.set( 1, 1, 1 ).normalize();
@@ -37,7 +36,12 @@ class App{
         this.controls.update();
         
         this.stats = new Stats();
-        container.appendChild( this.stats.dom );
+        document.body.appendChild( this.stats.dom );
+        
+        this.raycaster = new THREE.Raycaster();
+        this.workingMatrix = new THREE.Matrix4();
+        this.workingVector = new THREE.Vector3();
+        this.origin = new THREE.Vector3();
         
         this.initScene();
         this.setupXR();
@@ -52,37 +56,118 @@ class App{
     }
     
     initScene(){
-        this.radius = 0.08;
 
-        alert(navigator.xr.isSessionSupported( 'immersive-vr' ));
+		this.scene.background = new THREE.Color( 0xa0a0a0 );
+		this.scene.fog = new THREE.Fog( 0xa0a0a0, 50, 100 );
 
-        this.room = new THREE.LineSegments(
-                new BoxLineGeometry(6, 6, 6, 10, 10, 10), 
-                new THREE.LineBasicMaterial({color : 0x808080})
-            );
-        this.room.geometry.translate(0, 3, 0);
-        this.scene.add(this.room);
+		// ground
+		const ground = new THREE.Mesh( new THREE.PlaneBufferGeometry( 200, 200 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
+		ground.rotation.x = - Math.PI / 2;
+		this.scene.add( ground );
 
-        const geometry = new THREE.IcosahedronBufferGeometry(this.radius, 2);
+		var grid = new THREE.GridHelper( 200, 40, 0x000000, 0x000000 );
+		grid.material.opacity = 0.2;
+		grid.material.transparent = true;
+		this.scene.add( grid );
+        
+        const geometry = new THREE.BoxGeometry(5, 5, 5);
+        const material = new THREE.MeshPhongMaterial({ color:0xAAAA22 });
+        const edges = new THREE.EdgesGeometry( geometry );
+        const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 2 } ) );
 
-        for (let i = 0; i < 200; i++)
-        {
-            const object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial(
-            {
-                color: Math.random() * 0xFFFFFF
-            }));
-
-            object.position.x = this.random(-2, 2);
-            object.position.y = this.random(-2, 2);
-            object.position.z = this.random(-2, 2);
-
-            this.room.add(object);
+        this.colliders = [];
+        
+        for (let x=-100; x<100; x+=10){
+            for (let z=-100; z<100; z+=10){
+                if (x==0 && z==0) continue;
+                const box = new THREE.Mesh(geometry, material);
+                box.position.set(x, 2.5, z);
+                const edge = line.clone();
+                edge.position.copy( box.position );
+                this.scene.add(box);
+                this.scene.add(edge);
+                this.colliders.push(box);
+            }
         }
-    }
+        
+        
+    } 
     
     setupXR(){
         this.renderer.xr.enabled = true;
-        document.body.appendChild(VRButton.creatButton(this.renderer));
+        
+        const button = new VRButton( this.renderer );
+        
+        const self = this;
+        
+        function onSelectStart() {
+            
+            this.userData.selectPressed = true;
+        }
+
+        function onSelectEnd() {
+
+            this.userData.selectPressed = false;
+            
+        }
+        
+        this.controller = this.renderer.xr.getController( 0 );
+        this.dolly.add( this.controller );
+        this.controller.addEventListener( 'selectstart', onSelectStart );
+        this.controller.addEventListener( 'selectend', onSelectEnd );
+        this.controller.addEventListener( 'connected', function ( event ) {
+
+            const mesh = self.buildController.call(self, event.data );
+            mesh.scale.z = 0;
+            this.add( mesh );
+
+        } );
+        this.controller.addEventListener( 'disconnected', function () {
+
+            this.remove( this.children[ 0 ] );
+            self.controller = null;
+            self.controllerGrip = null;
+
+        } );
+        this.scene.add( this.controller );
+
+        const controllerModelFactory = new XRControllerModelFactory();
+
+        this.controllerGrip = this.renderer.xr.getControllerGrip( 0 );
+        this.controllerGrip.add( controllerModelFactory.createControllerModel( this.controllerGrip ) );
+        this.scene.add( this.controllerGrip );
+
+    }
+    
+    buildController( data ) {
+        let geometry, material;
+        
+        switch ( data.targetRayMode ) {
+            
+            case 'tracked-pointer':
+
+                geometry = new THREE.BufferGeometry();
+                geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( [ 0, 0, 0, 0, 0, - 1 ], 3 ) );
+                geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( [ 0.5, 0.5, 0.5, 0, 0, 0 ], 3 ) );
+
+                material = new THREE.LineBasicMaterial( { vertexColors: true, blending: THREE.AdditiveBlending } );
+
+                return new THREE.Line( geometry, material );
+
+            case 'gaze':
+
+                geometry = new THREE.RingBufferGeometry( 0.02, 0.04, 32 ).translate( 0, 0, - 1 );
+                material = new THREE.MeshBasicMaterial( { opacity: 0.5, transparent: true } );
+                return new THREE.Mesh( geometry, material );
+
+        }
+
+    }
+    
+    handleController( controller, dt ){
+        if (controller.userData.selectPressed ){
+            
+        }
     }
     
     resize(){
@@ -91,9 +176,10 @@ class App{
         this.renderer.setSize( window.innerWidth, window.innerHeight );  
     }
     
-	render( ) {   
+	render( ) {  
+        const dt = this.clock.getDelta();
         this.stats.update();
-        
+        if (this.controller ) this.handleController( this.controller, dt );
         this.renderer.render( this.scene, this.camera );
     }
 }
