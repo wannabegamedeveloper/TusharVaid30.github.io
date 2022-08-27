@@ -80,7 +80,7 @@ class App{
     
     setupXR(){
         this.renderer.xr.enabled = true;
-        document.body.appendChild(VRButton.creatButton(this.renderer, { sessionInit: { optionalFeatures: [ 'dom-overlay' ], domOverlay: { root: document.body } } } ));
+        document.body.appendChild(VRButton.creatButton(this.renderer));
     }
     
     resize(){
