@@ -99,7 +99,7 @@ class App{
 
         document.getElementById("TEXT 2").innerHTML = tolerance;
 
-        if (this.camera.position.x.toFixed(2) < tolerance && this.camera.position.y.toFixed(2) < tolerance && this.camera.position.z.toFixed(2) < tolerance)
+        if (Math.abs(this.camera.position.x.toFixed(2)) < tolerance && Math.abs(this.camera.position.y.toFixed(2)) < tolerance && Math.abs(this.camera.position.z.toFixed(2)) < tolerance)
         {
             document.getElementById("TEXT").innerHTML = this.camera.position.x.toFixed(2) + ", " + this.camera.position.y.toFixed(2) + ", " + this.camera.position.z.toFixed(2);
             this.insideBounds = true;
