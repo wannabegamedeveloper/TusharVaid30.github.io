@@ -97,7 +97,9 @@ class App{
         var position = new THREE.Vector3;
         position.setFromMatrixPosition(this.camera.matrixWorld);
 
-        if (this.camera.position.x.toFixed(2) < tolerance && this.camera.position.y.toFixed(2) < tolerance && this.camera.position.z.toFixed(2) < tolerance)
+        document.getElementById("TEXT 2").innerHTML = this.tolerance;
+
+        if (this.camera.position.x.toFixed(2) < this.tolerance && this.camera.position.y.toFixed(2) < this.tolerance && this.camera.position.z.toFixed(2) < this.tolerance)
         {
             document.getElementById("TEXT").innerHTML = this.camera.position.x.toFixed(2) + ", " + this.camera.position.y.toFixed(2) + ", " + this.camera.position.z.toFixed(2);
             this.insideBounds = true;
