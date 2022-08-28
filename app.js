@@ -112,7 +112,7 @@ class App{
 
         document.getElementById("button").onclick = function(){TakePicture()};
 
-        TakePicture(){
+        function TakePicture(){
             if (insideBounds)
                 alert("Taken Screenshot");
             else
