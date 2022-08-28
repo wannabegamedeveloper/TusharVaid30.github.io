@@ -7,10 +7,6 @@ class App{
 	constructor(){
 		const container = document.createElement( 'div' );
 		document.body.appendChild( container );
-
-        let tolerance = 2.0;
-
-        let insideBounds = true;
         
         this.clock = new THREE.Clock();
                 
@@ -97,9 +93,13 @@ class App{
         var position = new THREE.Vector3;
         position.setFromMatrixPosition(this.camera.matrixWorld);
 
-        document.getElementById("TEXT 2").innerHTML = this.tolerance;
+        let tolerance = 2.0;
 
-        if (this.camera.position.x.toFixed(2) < this.tolerance && this.camera.position.y.toFixed(2) < this.tolerance && this.camera.position.z.toFixed(2) < this.tolerance)
+        let insideBounds = true;
+
+        document.getElementById("TEXT 2").innerHTML = tolerance;
+
+        if (this.camera.position.x.toFixed(2) < tolerance && this.camera.position.y.toFixed(2) < tolerance && this.camera.position.z.toFixed(2) < tolerance)
         {
             document.getElementById("TEXT").innerHTML = this.camera.position.x.toFixed(2) + ", " + this.camera.position.y.toFixed(2) + ", " + this.camera.position.z.toFixed(2);
             this.insideBounds = true;
@@ -110,17 +110,17 @@ class App{
             this.insideBounds = false;
         }
 
+        document.getElementById("button").onclick = TakePicture(){
+            if (insideBounds)
+                alert("Taken Screenshot");
+            else
+                alert("Out of Bounds. Screenshot not taken.");
+        };
+
         this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
-
-    TakePicture()
-    {
-        if (this.insideBounds)
-            alert("Taken Screenshot");
-        else
-            alert("Out of Bounds. Screenshot not taken.");
-    }
+    
 }
 
 export { App };
