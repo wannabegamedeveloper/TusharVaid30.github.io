@@ -23,28 +23,12 @@
         <script src="../../libs/fas.js"></script>
         <p id="TEXT" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> DEVICE LOCATION </p>
         <script type="module">
-            const XR = navigator.xr;
+            import { App } from './app.js';
 
-            if (XR) {
-              XR.requestSession("inline").then((xrSession) => {
-                xrSession.requestReferenceSpace("local").then((xrReferenceSpace) => {
-                  xrSession.requestAnimationFrame((time, xrFrame) => {
-                    const viewer = xrFrame.getViewerPose(xrReferenceSpace);
-
-                    gl.bindFramebuffer(xrWebGLLayer.framebuffer);
-
-                    for (const xrView of viewer.views) {
-                      const xrViewport = xrWebGLLayer.getViewport(xrView);
-                      gl.viewport(xrViewport.x, xrViewport.y,
-                                  xrViewport.width, xrViewport.height);
-                    }
-                  });
-                });
-              });
-            } else {
-              /* WebXR is not available */
-            }
-
+            document.addEventListener("DOMContentLoaded", function(){
+                const app = new App();
+                window.app = app;
+            });
         </script>
 
         <button id="button">Take Picture</button>
