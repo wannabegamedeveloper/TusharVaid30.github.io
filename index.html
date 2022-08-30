@@ -31,7 +31,7 @@
                     // beta: front back motion
                     var frontToBack = event.beta;
 
-                    handleOrientationEvent(frontToBack, leftToRight, rotateDegrees);
+                    document.getElementById("TEXT 2").innerHTML = frontToBack + ", " + leftToRight + ", " + rotateDegrees;
                 }, true);
             }
             else
@@ -39,10 +39,6 @@
                 alert("NO DEVICE ORIENTATION");
                 document.getElementById("TEXT 2").innerHTML = "ass";
             }
-
-            var handleOrientationEvent = function(frontToBack, leftToRight, rotateDegrees) {
-                document.getElementById("TEXT 2").innerHTML = frontToBack + ", " + leftToRight + ", " + rotateDegrees;
-            };
         </script>
 
         <button id="button">Take Picture</button>
