@@ -24,7 +24,7 @@
         <p id="WALKING_TIME_ID" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> WALKING TIME </p>
         <script>
 
-            var threshold = 1.3;
+            var threshold = 0.3;
 
             var walkingTime = 0;
             var accMagnitude;
@@ -47,7 +47,6 @@
 
             setInterval(function () {
                 if (accMagnitude > threshold) walkingTime++;
-                else if (walkingTime > 0) walkingTime--;
 
                 document.getElementById("WALKING_TIME_ID").innerHTML = walkingTime;
             }, 1000);
@@ -55,9 +54,9 @@
             function TakePicture()
             {
                 if (walkingTime > 4)
-                {
                     alert("picture taken outside bounds");
-                }
+                else
+                    walkingTime = 0;
             }
 
         </script>
