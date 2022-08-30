@@ -67,8 +67,6 @@ class ARButton{
         this.stylizeElement( button, true, 30, true );
         
         function onSessionStarted( session ) {
-            session.environmentBlendMode = 'opaque';
-
             session.addEventListener( 'end', onSessionEnded );
 
             self.renderer.xr.setReferenceSpaceType( 'local' );

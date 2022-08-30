@@ -21,18 +21,19 @@
 	</head>
 	<body>
         <script src="../../libs/fas.js"></script>
-        <p id="TEXT" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> DEVICE LOCATION </p>
         <script type="module">
-            import { App } from './app.js';
-
-            document.addEventListener("DOMContentLoaded", function(){
-                const app = new App();
-                window.app = app;
-            });
+            if (window.DeviceOrientationEvent)
+            {
+                window.addEventListener('deviceOrientation', (eventData) => {
+                    this.setState({
+                        alpha: eventData.alpha,
+                        beta: eventData.beta,
+                        gamma: eventData.gamma
+                    });
+                }, false);
+            }
         </script>
 
         <button id="button">Take Picture</button>
-        <p id="TEXT 2" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> TOLERANCE </p>
-
 	</body>
 </html>
