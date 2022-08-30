@@ -22,7 +22,7 @@
 	<body>
         <p id="TEXT 2" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> TOLERANCE </p>
         <script>
-            /*if (window.DeviceOrientationEvent) {
+            if (window.DeviceOrientationEvent) {
                 window.addEventListener("deviceorientation", function(event) {
                     // alpha: rotation around z-axis
                     var rotateDegrees = event.alpha;
@@ -36,13 +36,13 @@
             }
             else
             {
-                alert("NO DEVICE ORIENTATION");*/
+                alert("NO DEVICE ORIENTATION");
                 document.getElementById("TEXT 2").innerHTML = "ass";
-            /*}
+            }
 
             var handleOrientationEvent = function(frontToBack, leftToRight, rotateDegrees) {
                 document.getElementById("TEXT 2").innerHTML = frontToBack + ", " + leftToRight + ", " + rotateDegrees;
-            };*/
+            };
         </script>
 
         <button id="button">Take Picture</button>
