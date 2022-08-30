@@ -23,16 +23,13 @@
         <p id="TEXT 2" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> TOLERANCE </p>
         <script>
             if (window.DeviceOrientationEvent) {
-                window.addEventListener("deviceorientation", function(event) {
-                    // alpha: rotation around z-axis
-                    var rotateDegrees = event.alpha;
-                    // gamma: left to right
-                    var leftToRight = event.gamma;
-                    // beta: front back motion
-                    var frontToBack = event.beta;
+                window.ondevicemotion = function(event) {
+                    var x = event.accelerationIncludingGravity.x;
+                    var y = event.accelerationIncludingGravity.y;
+                    var z = event.accelerationIncludingGravity.z;
 
                     document.getElementById("TEXT 2").innerHTML = frontToBack + ", " + leftToRight + ", " + rotateDegrees;
-                }, true);
+                };
             }
             else
             {
