@@ -21,10 +21,18 @@
 	</head>
 	<body>
         <p id="TEXT 2" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> DISTANCE </p>
+        <p id="TEXT 3" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> MAGNET </p>
         <script>
             var distance = 0;
             var time = 0;
             var accMagnitude;
+
+            let magSensor = new Magnetometer({frequency: 60});
+
+            magSensor.addEventListener('reading', (e) =>
+            {
+                document.getElementById("TEXT 3").innerHTML = magSensor.x + ", " + magSensor.y + ", " + magSensor.z;
+            });
 
             if (window.DeviceOrientationEvent) {
                 window.ondevicemotion = function(event) {
