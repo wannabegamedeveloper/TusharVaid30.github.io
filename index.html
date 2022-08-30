@@ -24,9 +24,9 @@
         <script>
             if (window.DeviceOrientationEvent) {
                 window.ondevicemotion = function(event) {
-                    var x = event.accelerationIncludingGravity.x;
-                    var y = event.accelerationIncludingGravity.y;
-                    var z = event.accelerationIncludingGravity.z;
+                    var x = event.acceleration.x;
+                    var y = event.acceleration.y;
+                    var z = event.acceleration.z;
 
                     document.getElementById("TEXT 2").innerHTML = x + ", " + y + ", " + z;
                 };
