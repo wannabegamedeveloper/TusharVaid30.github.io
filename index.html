@@ -47,6 +47,7 @@
 
             setInterval(function () {
                 if (accMagnitude > threshold) walkingTime++;
+                else if (walkingTime > 0) walkingTime--;
 
                 document.getElementById("WALKING_TIME_ID").innerHTML = walkingTime;
             }, 1000);
