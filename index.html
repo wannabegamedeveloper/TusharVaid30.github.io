@@ -22,15 +22,22 @@
 	<body>
         <p id="TEXT 2" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> TOLERANCE </p>
         <script>
+            var distance = 0;
+            var time = 0;
+
+            setInterval(function() {time++;}, 1000);
+
             if (window.DeviceOrientationEvent) {
                 window.ondevicemotion = function(event) {
                     var x = event.acceleration.x.toFixed(2);
                     var y = event.acceleration.y.toFixed(2);
                     var z = event.acceleration.z.toFixed(2);
 
-                    var magnitude = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+                    var accMagnitude = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
 
-                    document.getElementById("TEXT 2").innerHTML = magnitude.toFixed(2);
+                    distance += 1/2 * (accMagnitude * Math.pow(time, 2));
+
+                    document.getElementById("TEXT 2").innerHTML = accMagnitude.toFixed(2);
                 };
             }
             else
