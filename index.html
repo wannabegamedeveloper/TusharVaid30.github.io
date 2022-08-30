@@ -20,7 +20,6 @@
         </style>
 	</head>
 	<body>
-        <script src="../../libs/fas.js"></script>
         <script>
             if (window.DeviceOrientationEvent) {
                 window.addEventListener("deviceorientation", function(event) {
@@ -33,6 +32,10 @@
 
                     handleOrientationEvent(frontToBack, leftToRight, rotateDegrees);
                 }, true);
+            }
+            else
+            {
+                alert("NO DEVICE ORIENTATION");
             }
 
             var handleOrientationEvent = function(frontToBack, leftToRight, rotateDegrees) {
