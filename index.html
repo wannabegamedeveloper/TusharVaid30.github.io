@@ -24,6 +24,7 @@
         <script>
             var distance = 0;
             var time = 0;
+            var accMagnitude;
 
             if (window.DeviceOrientationEvent) {
                 window.ondevicemotion = function(event) {
@@ -31,7 +32,7 @@
                     var y = event.acceleration.y.toFixed(2);
                     var z = event.acceleration.z.toFixed(2);
 
-                    var accMagnitude = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+                    accMagnitude = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
 
                     document.getElementById("TEXT 2").innerHTML = distance.toFixed(2);
                 };
