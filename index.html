@@ -21,7 +21,7 @@
 	</head>
 	<body>
         <script src="../../libs/fas.js"></script>
-        <script type="module">
+        <script>
             if (window.DeviceOrientationEvent) {
                 window.addEventListener("deviceorientation", function(event) {
                     // alpha: rotation around z-axis
@@ -36,7 +36,7 @@
             }
 
             var handleOrientationEvent = function(frontToBack, leftToRight, rotateDegrees) {
-                document.getElementByID("TEXT 2").innerHTML = frontToBack + ", " + leftToRight + ", " + rotateDegrees;
+                document.getElementById("TEXT 2").innerHTML = frontToBack + ", " + leftToRight + ", " + rotateDegrees;
             };
         </script>
 
