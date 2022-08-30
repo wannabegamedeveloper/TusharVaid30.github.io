@@ -28,7 +28,9 @@
                     var y = event.acceleration.y.toFixed(2);
                     var z = event.acceleration.z.toFixed(2);
 
-                    document.getElementById("TEXT 2").innerHTML = x + ", " + y + ", " + z;
+                    var magnitude = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+
+                    document.getElementById("TEXT 2").innerHTML = magnitude.toFixed(2);
                 };
             }
             else
