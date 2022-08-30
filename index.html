@@ -51,9 +51,17 @@
                 document.getElementById("WALKING_TIME_ID").innerHTML = walkingTime;
             }, 1000);
 
+            function TakePicture()
+            {
+                if (walkingTime > 4)
+                {
+                    alert("picture taken outside bounds");
+                }
+            }
+
         </script>
 
-        <button id="button">Take Picture</button>
+        <button id="button" onclick="TakePicture()">Take Picture</button>
 
 	</body>
 </html>
