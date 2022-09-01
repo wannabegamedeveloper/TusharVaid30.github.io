@@ -32,13 +32,22 @@
 
             var canvas = document.getElementById("movArea");
             const context = canvas.getContext("2d");
-            context.beginPath();
-            context.moveTo(75, 25);
-            context.lineTo(100, 75);
-            context.lineTo(100, 25);
-            context.lineTo(75, 25);
-            context.stroke();
-            context.closePath();
+
+            let gyroscope = new Gyroscope({frequency: 60});
+
+            gyroscope.addEventListener('reading', (e) => {
+                context.beginPath();
+                context.translate(100, 50);
+                context.rotate(1.15);
+                context.moveTo(-25, -25);
+                context.lineTo(0, 25);
+                context.lineTo(25, -25);
+                context.lineTo(-25, -25);
+                context.stroke();
+                context.closePath();
+            });
+            gyroscope.start();
+            
 
             if (window.DeviceOrientationEvent) {
                 window.ondevicemotion = function(event) {
