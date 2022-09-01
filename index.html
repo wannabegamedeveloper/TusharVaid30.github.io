@@ -59,7 +59,7 @@
                     var canvas = document.getElementById("movArea");
                     var rect = canvas.getBoundingClientRect();
 
-                    canvas.style.left = (rect.left + x) + 'px';
+                    canvas.style.left = (rect.left + x * 10) + 'px';
 
                     document.getElementById("ACCELERATION_ID").innerHTML = y + " ";
                 };
