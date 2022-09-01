@@ -23,7 +23,6 @@
                 top: 50%;
                 left: 50%;
                 margin-right: -50%;
-                transform: translate(-50%, -50%);
             }
         </style>
 	</head>
@@ -61,7 +60,7 @@
 
                     if (rect.left > 0 && rect.left < screen.width && x > 0)
                     {
-                        canvas.style.transform = "translate(1px)";
+                        canvas.style.left += "1px";
                         document.getElementById("ACCELERATION_ID").innerHTML = x + " ";
                     }
                       document.getElementById("WALKING_TIME_ID").innerHTML = "" + rect.left;
