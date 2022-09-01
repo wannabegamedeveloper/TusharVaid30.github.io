@@ -65,12 +65,12 @@
                         else if (x < -threshold)
                             canvas.style.left = (rect.x - 1) + "px";
                     }
-                    if (rect.left > 0 && rect.left < screen.width)
+                    if (rect.top > 0 && rect.top < screen.height)
                     {
                         if (y + z > threshold)
-                            canvas.style.left = (rect.y + 1) + "px";
+                            canvas.style.top = (rect.y + 1) + "px";
                         else if (y + z < -threshold)
-                            canvas.style.left = (rect.y - 1) + "px";
+                            canvas.style.top = (rect.y - 1) + "px";
                     }
                       document.getElementById("WALKING_TIME_ID").innerHTML = "" + rect.left;
                 };
