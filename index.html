@@ -59,9 +59,11 @@
                     var canvas = document.getElementById("movArea");
                     var rect = canvas.getBoundingClientRect();
                     if (rect.left > 0 && rect.left < screen.width && x > threshold)
+                    {
                         canvas.style.left = (rect.left + x * 2) + 'px';
 
-                    document.getElementById("ACCELERATION_ID").innerHTML = x + " ";
+                        document.getElementById("ACCELERATION_ID").innerHTML = x + " ";
+                    }
                 };
             }
             else
