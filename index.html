@@ -20,6 +20,7 @@
         </style>
 	</head>
 	<body>
+        <canvas id="movArea" width="200" height="100" style="border:1px solid #d3d3d3;">
         <p id="ACCELERATION_ID" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> ACCELERATION </p>
         <p id="WALKING_TIME_ID" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> WALKING TIME </p>
         <script>
@@ -28,6 +29,16 @@
 
             var walkingTime = 0;
             var accMagnitude;
+
+            var canvas = document.getElementById("movArea");
+            const context = canvas.getContext("2d");
+            context.beginPath();
+            context.moveTo(75, 25);
+            context.lineTo(100, 75);
+            context.lineTo(100, 25);
+            context.lineTo(75, 25);
+            context.stroke();
+            context.closePath();
 
             if (window.DeviceOrientationEvent) {
                 window.ondevicemotion = function(event) {
