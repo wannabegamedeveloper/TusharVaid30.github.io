@@ -67,9 +67,9 @@
                     }
                     if (rect.top > 0 && rect.top < screen.height)
                     {
-                        if (y + z > threshold)
+                        if (y > threshold)
                             canvas.style.top = (rect.y + 1) + "px";
-                        else if (y + z < -threshold)
+                        else if (y < -threshold)
                             canvas.style.top = (rect.y - 1) + "px";
                     }
                       document.getElementById("WALKING_TIME_ID").innerHTML = "" + rect.left;
@@ -101,7 +101,6 @@
                 const context = canvas.getContext("2d");
                 context.fillStyle = "blue";
                 context.fillRect(-100, -50, 200, 100); 
-
             }
 
         </script>
