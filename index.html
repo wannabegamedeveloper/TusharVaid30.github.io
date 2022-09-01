@@ -38,7 +38,7 @@
             let gyroscope = new Gyroscope({frequency: 60});
 
             gyroscope.addEventListener('reading', (e) => {
-                context.clearRect(0, 0, canvas.width, canvas.height);
+                //context.clearRect(0, 0, canvas.width, canvas.height);
                 context.beginPath();
                 context.translate(100, 50);
                 context.moveTo(-25, -25);
