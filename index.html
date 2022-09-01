@@ -33,11 +33,12 @@
             var canvas = document.getElementById("movArea");
             const context = canvas.getContext("2d");
 
+            context.beginPath();
+            context.translate(100, 50);
+
             let gyroscope = new Gyroscope({frequency: 60});
 
             gyroscope.addEventListener('reading', (e) => {
-                context.beginPath();
-                context.translate(100, 50);
                 context.rotate(1.15);
                 context.moveTo(-25, -25);
                 context.lineTo(0, 25);
@@ -46,8 +47,6 @@
                 context.stroke();
                 context.closePath();
             });
-            gyroscope.start();
-            
 
             if (window.DeviceOrientationEvent) {
                 window.ondevicemotion = function(event) {
