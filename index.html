@@ -17,12 +17,21 @@
             body{
                 margin: 0;
             }
+            #movArea
+            {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%);
+            }
         </style>
 	</head>
 	<body>
-        <canvas id="movArea" width="200" height="100" style="border:1px solid #d3d3d3;">CANVAS NOT SUPPORTED</canvas>
         <p id="ACCELERATION_ID" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> ACCELERATION </p>
         <p id="WALKING_TIME_ID" style="text-shadow: 0 0 3px #fff, 0 0 5px #fff;"> WALKING TIME </p>
+        <button id="button" onclick="TakePicture()">Take Picture</button>
+        <canvas id="movArea" width="5" height="5" style="border:1px solid #d3d3d3;">CANVAS NOT SUPPORTED</canvas>
         <script>
 
             var threshold = 0.3;
@@ -30,23 +39,12 @@
             var walkingTime = 0;
             var accMagnitude;
 
-            var canvas = document.getElementById("movArea");
-            const context = canvas.getContext("2d");
-
-            context.beginPath();
-                context.translate(100, 50);
-                context.moveTo(-25, -25);
-                context.lineTo(0, 25);
-                context.lineTo(25, -25);
-                context.lineTo(-25, -25);
-                context.stroke();
-                context.closePath();
+            Draw();
 
             let gyroscope = new Gyroscope({frequency: 60});
 
             gyroscope.addEventListener('reading', (e) => {
-                //context.clearRect(0, 0, canvas.width, canvas.height);
-                
+
             });
 
             if (window.DeviceOrientationEvent) {
@@ -56,6 +54,12 @@
                     var z = event.acceleration.z.toFixed(2);
 
                     accMagnitude = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+
+
+                    var canvas = document.getElementById("movArea");
+                    var rect = canvas.getBoundingClientRect();
+
+                    canvas.style.left = (rect.left + x) + 'px';
 
                     document.getElementById("ACCELERATION_ID").innerHTML = y + " ";
                 };
@@ -79,9 +83,18 @@
                     walkingTime = 0;
             }
 
+
+            function Draw()
+            {                
+                var canvas = document.getElementById("movArea");
+                const context = canvas.getContext("2d");
+                context.fillStyle = "blue";
+                context.fillRect(-100, -50, 200, 100); 
+
+            }
+
         </script>
 
-        <button id="button" onclick="TakePicture()">Take Picture</button>
 
 	</body>
 </html>
