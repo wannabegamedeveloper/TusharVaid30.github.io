@@ -60,7 +60,8 @@
                     var rect = canvas.getBoundingClientRect();
                     if (rect.left > 0 && rect.left < screen.width && x > 0)
                     {
-                        canvas.style.left = rect.left - 0.1;
+                        var left = rect.left + 1;
+                        canvas.style.left = left;
                         document.getElementById("ACCELERATION_ID").innerHTML = x + " ";
                     }
                       document.getElementById("WALKING_TIME_ID").innerHTML = "" + rect.left;
