@@ -61,9 +61,9 @@
                     if (rect.left > 0 && rect.left < screen.width && x > threshold)
                     {
                         canvas.style.left += x + 'px';
-                        document.getElementById("WALKING_TIME_ID").innerHTML = "" + rect.left;
                         document.getElementById("ACCELERATION_ID").innerHTML = x + " ";
                     }
+                    document.getElementById("WALKING_TIME_ID").innerHTML = "" + rect.left;
                 };
             }
             else
