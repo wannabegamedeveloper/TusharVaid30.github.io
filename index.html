@@ -34,7 +34,7 @@
         <canvas id="movArea" width="5" height="5" style="border:1px solid #d3d3d3;">CANVAS NOT SUPPORTED</canvas>
         <script>
 
-            var threshold = 0.3;
+            var threshold = 0.1;
 
             var walkingTime = 0;
             var accMagnitude;
@@ -58,7 +58,7 @@
 
                     var canvas = document.getElementById("movArea");
                     var rect = canvas.getBoundingClientRect();
-                    if (rect.left > 0 && rect.left < screen.width)
+                    if (rect.left > 0 && rect.left < screen.width && x > threshold)
                         canvas.style.left = (rect.left + x * 10) + 'px';
 
                     document.getElementById("ACCELERATION_ID").innerHTML = y + " ";
