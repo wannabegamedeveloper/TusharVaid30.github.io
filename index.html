@@ -58,9 +58,10 @@
 
                     var canvas = document.getElementById("movArea");
                     var rect = canvas.getBoundingClientRect();
+
                     if (rect.left > 0 && rect.left < screen.width && x > 0)
                     {
-                        canvas.style.transform = "translate(" + x + ")";
+                        canvas.style.transform = "translate(" + x + "px)";
                         document.getElementById("ACCELERATION_ID").innerHTML = x + " ";
                     }
                       document.getElementById("WALKING_TIME_ID").innerHTML = "" + rect.left;
