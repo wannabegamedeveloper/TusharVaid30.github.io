@@ -60,7 +60,7 @@
 
                     if (rect.left > 0 && rect.left < screen.width && x > 0)
                     {
-                        canvas.style.left += "1px";
+                        canvas.style.left = (rect.x + 1) + "px";
                         document.getElementById("ACCELERATION_ID").innerHTML = x + " ";
                     }
                       document.getElementById("WALKING_TIME_ID").innerHTML = "" + rect.left;
