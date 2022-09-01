@@ -58,9 +58,12 @@
                     var canvas = document.getElementById("movArea");
                     var rect = canvas.getBoundingClientRect();
 
-                    if (rect.left > 0 && rect.left < screen.width && x > 0)
+                    if (rect.left > 0 && rect.left < screen.width)
                     {
-                        canvas.style.left = (rect.x + 1) + "px";
+                        if (x > threshold)
+                            canvas.style.left = (rect.x + 1) + "px";
+                        else if (x < -threshold)
+                            canvas.style.left = (rect.x - 1) + "px";
                         document.getElementById("ACCELERATION_ID").innerHTML = x + " ";
                     }
                       document.getElementById("WALKING_TIME_ID").innerHTML = "" + rect.left;
